@@ -8,7 +8,7 @@ namespace FreqMon
 {
     public static class Program
     {
-        public static Dictionary<float, int> CpuFrequencies = new Dictionary<float, int>();
+        public static Dictionary<double, int> CpuFrequencies = new Dictionary<double, int>();
         public static StreamReader[] Readers = new StreamReader[Environment.ProcessorCount];
         static void Main(string[] args)
         {
@@ -35,9 +35,9 @@ namespace FreqMon
                 Readers[i].BaseStream.Seek(0, SeekOrigin.Begin);
 
                 var stringSpeed = Readers[i].ReadLine().Trim();
-                int cpuFreqHz = int.Parse(stringSpeed);
+                var cpuFreqHz = int.Parse(stringSpeed);
 
-                var cpuFreqGhz = (float)Math.Round(((float)cpuFreqHz / 1000000), 1, MidpointRounding.AwayFromZero);
+                var cpuFreqGhz = Math.Round((cpuFreqHz / 1000000f), 1, MidpointRounding.AwayFromZero);
 
                 if (!CpuFrequencies.ContainsKey(cpuFreqGhz))
                     CpuFrequencies.TryAdd(cpuFreqGhz, 1);
