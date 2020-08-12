@@ -20,7 +20,7 @@ namespace FreqMon
                 UpdateCpuCoreFrequencies();
                 var highestFreqPair = CpuFrequencies.OrderByDescending(kvp => kvp.Key).Take(1);
 
-                foreach (var (cores, frequency) in highestFreqPair)
+                foreach (var (frequency, cores) in highestFreqPair)
                     Console.WriteLine($"  {cores} C @ {frequency.ToString("0.0")}Ghz ");
 
                 Thread.Sleep(1000);
